@@ -11,7 +11,7 @@ import { Mqtt } from './lib/mqtt.js';
 import eDomoticzAccessory from './lib/domoticz_accessory.js';
 import Constants from './lib/constants.js';
 import { Helper } from './lib/helper.js';
-import { eDomoticzServices } from './lib/services.js';
+import { initEDomoticzServices, eDomoticzServices } from './lib/services.js';
 
 // Homebridge injects the API object via this exported initializer
 export default function(homebridge) {
@@ -22,55 +22,7 @@ export default function(homebridge) {
   const Types = homebridge.hapLegacyTypes;               // kept even if unused
   const UUID = homebridge.hap.uuid;
 
-  // Preserve the original inheritance wiring
-  util.inherits(eDomoticzServices.TotalConsumption, Characteristic);
-  util.inherits(eDomoticzServices.CurrentConsumption, Characteristic);
-  util.inherits(eDomoticzServices.GasConsumption, Characteristic);
-  util.inherits(eDomoticzServices.TempOverride, Characteristic);
-
-  util.inherits(eDomoticzServices.MeterDeviceService, Service);
-  util.inherits(eDomoticzServices.GasDeviceService, Service);
-
-  util.inherits(eDomoticzServices.Ampere, Characteristic);
-  util.inherits(eDomoticzServices.AMPDeviceService, Service);
-
-  util.inherits(eDomoticzServices.Volt, Characteristic);
-  util.inherits(eDomoticzServices.VOLTDeviceService, Service);
-
-  util.inherits(eDomoticzServices.CurrentUsage, Characteristic);
-  util.inherits(eDomoticzServices.UsageDeviceService, Service);
-
-  util.inherits(eDomoticzServices.TodayConsumption, Characteristic);
-  util.inherits(eDomoticzServices.Barometer, Characteristic);
-
-  util.inherits(eDomoticzServices.WaterFlow, Characteristic);
-  util.inherits(eDomoticzServices.TotalWaterFlow, Characteristic);
-  util.inherits(eDomoticzServices.WaterDeviceService, Service);
-
-  util.inherits(eDomoticzServices.WeatherService, Service);
-
-  util.inherits(eDomoticzServices.WindSpeed, Characteristic);
-  util.inherits(eDomoticzServices.WindChill, Characteristic);
-  util.inherits(eDomoticzServices.WindDirection, Characteristic);
-  util.inherits(eDomoticzServices.WindDeviceService, Service);
-
-  util.inherits(eDomoticzServices.Rainfall, Characteristic);
-  util.inherits(eDomoticzServices.RainDeviceService, Service);
-
-  util.inherits(eDomoticzServices.Visibility, Characteristic);
-  util.inherits(eDomoticzServices.VisibilityDeviceService, Service);
-
-  util.inherits(eDomoticzServices.SolRad, Characteristic);
-  util.inherits(eDomoticzServices.SolRadDeviceService, Service);
-
-  util.inherits(eDomoticzServices.LocationService, Service);
-  util.inherits(eDomoticzServices.Location, Characteristic);
-
-  util.inherits(eDomoticzServices.InfotextDeviceService, Service);
-  util.inherits(eDomoticzServices.Infotext, Characteristic);
-
-  util.inherits(eDomoticzServices.UVDeviceService, Service);
-  util.inherits(eDomoticzServices.UVIndex, Characteristic);
+  initEDomoticzServices(homebridge.hap);
 
   // Register platform (same as original)
   homebridge.registerPlatform('homebridge-edomoticz', 'eDomoticz', eDomoticzPlatform, true);
