@@ -11,7 +11,7 @@ import { Mqtt } from './lib/mqtt.js';
 import eDomoticzAccessory from './lib/domoticz_accessory.js';
 import Constants from './lib/constants.js';
 import { Helper } from './lib/helper.js';
-import { initEDomoticzServices, eDomoticzServices } from './lib/services.js';
+import { initEDomoticzServices } from './lib/services.js';
 
 // Homebridge injects the API object via this exported initializer
 export default function(homebridge) {
