@@ -11,7 +11,7 @@ import { Mqtt } from './lib/mqtt.js';
 import eDomoticzAccessory from './lib/domoticz_accessory.js';
 import Constants from './lib/constants.js';
 import { Helper } from './lib/helper.js';
-import { initEDomoticzServices } from './lib/services.js';
+//import { initEDomoticzServices } from './lib/services.js';
 
 // Homebridge injects the API object via this exported initializer
 export default function(homebridge) {
@@ -22,7 +22,7 @@ export default function(homebridge) {
   const Types = homebridge.hapLegacyTypes;               // kept even if unused
   const UUID = homebridge.hap.uuid;
 
-  initEDomoticzServices(homebridge.hap);
+  //initEDomoticzServices(homebridge.hap);
 
   // Register platform (same as original)
   homebridge.registerPlatform('homebridge-edomoticz', 'eDomoticz', eDomoticzPlatform, true);
